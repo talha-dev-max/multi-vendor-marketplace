@@ -1,0 +1,25 @@
+<div class="sidebar-layout">
+  <aside class="app-sidebar">
+    <div class="brand">🏪 Vendor Portal</div>
+
+    <nav class="nav">
+      <a routerLink="/vendor/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/vendor/products" routerLinkActive="active">Products</a>
+      <a routerLink="/vendor/orders" routerLinkActive="active">Orders</a>
+      <a routerLink="/vendor/earnings" routerLinkActive="active">Earnings</a>
+      <a routerLink="/">Back to Shop</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info" *ngIf="user">
+        <strong>{{ user.name }}</strong>
+        {{ user.email }}
+      </div>
+      <button type="button" class="btn btn-ghost btn-block btn-sm" (click)="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

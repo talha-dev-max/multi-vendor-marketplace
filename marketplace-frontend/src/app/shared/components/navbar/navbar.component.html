@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a routerLink="/" class="navbar-brand">🛒 Marketplace</a>
+
+    <form class="navbar-search" (ngSubmit)="search()">
+      <input type="search" placeholder="Search products..." [(ngModel)]="searchQuery" name="q" />
+    </form>
+
+    <div class="navbar-nav">
+      <a routerLink="/products">Shop</a>
+
+      <ng-container *ngIf="user; else guestLinks">
+        <a routerLink="/cart" class="cart-badge">
+          Cart
+          <span class="badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+        </a>
+        <a routerLink="/my/orders">My Orders</a>
+        <a *ngIf="userService.hasRole('vendor')" routerLink="/vendor/dashboard">Vendor</a>
+        <a *ngIf="userService.hasRole('admin')" routerLink="/admin/dashboard">Admin</a>
+        <span class="text-muted">{{ user.name }}</span>
+        <button type="button" class="btn btn-ghost btn-sm" (click)="logout()">Logout</button>
+      </ng-container>
+
+      <ng-template #guestLinks>
+        <a routerLink="/auth/login">Login</a>
+        <a routerLink="/auth/register" class="btn btn-primary btn-sm">Register</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>

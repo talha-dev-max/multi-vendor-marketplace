@@ -1,0 +1,13 @@
+<div class="product-card" (click)="goToProduct()">
+  <div class="product-image">
+    <img *ngIf="imageUrl; else noImage" [src]="imageUrl" [alt]="product.name" />
+    <ng-template #noImage>
+      <span class="no-image">No image</span>
+    </ng-template>
+  </div>
+  <div class="product-body">
+    <div class="product-name">{{ product.name }}</div>
+    <div class="product-vendor" *ngIf="product.vendor">by {{ product.vendor.store_name }}</div>
+    <div class="product-price">${{ product.price | number: '1.2-2' }}</div>
+  </div>
+</div>

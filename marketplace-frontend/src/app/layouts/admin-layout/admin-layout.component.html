@@ -1,0 +1,26 @@
+<div class="sidebar-layout">
+  <aside class="app-sidebar">
+    <div class="brand">⚡ Admin Panel</div>
+
+    <nav class="nav">
+      <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin/vendor-approvals" routerLinkActive="active">Vendor Approvals</a>
+      <a routerLink="/admin/orders" routerLinkActive="active">All Orders</a>
+      <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+      <a routerLink="/admin/categories" routerLinkActive="active">Categories</a>
+      <a routerLink="/">Back to Shop</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info" *ngIf="user">
+        <strong>{{ user.name }}</strong>
+        {{ user.email }}
+      </div>
+      <button type="button" class="btn btn-ghost btn-block btn-sm" (click)="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>
