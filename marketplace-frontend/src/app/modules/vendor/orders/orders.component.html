@@ -1,0 +1,49 @@
+<div class="app-header">
+  <h1>Orders</h1>
+</div>
+
+<div class="app-content">
+  <div *ngIf="loading" class="empty-state">Loading...</div>
+
+  <div *ngIf="!loading && orders.length === 0" class="empty-state">
+    <h3>No orders yet</h3>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading && orders.length > 0">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order #</th>
+          <th>Subtotal</th>
+          <th>Net</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders">
+          <td>#{{ o.id }} <span class="text-muted">(Order {{ o.order_id }})</span></td>
+          <td>${{ o.subtotal | number: '1.2-2' }}</td>
+          <td>${{ o.net | number: '1.2-2' }}</td>
+          <td><span class="status-badge" [ngClass]="'status-' + o.status">{{ o.status }}</span></td>
+          <td class="text-right">
+            <button
+              *ngIf="nextStatus(o.status) as next"
+              type="button"
+              class="btn btn-primary btn-sm"
+              (click)="updateStatus(o.id, next)"
+            >
+              Mark as {{ next }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    [currentPage]="meta.current_page"
+    [lastPage]="meta.last_page"
+    (pageChange)="load($event)"
+  ></app-pagination>
+</div>

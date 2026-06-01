@@ -1,0 +1,51 @@
+<div class="app-header">
+  <h1>Vendor Approvals</h1>
+</div>
+
+<div class="app-content">
+  <div class="flex gap-sm mb-lg">
+    <button type="button" class="btn btn-sm" [class.btn-primary]="statusFilter === 'pending'" [class.btn-secondary]="statusFilter !== 'pending'" (click)="changeFilter('pending')">Pending</button>
+    <button type="button" class="btn btn-sm" [class.btn-primary]="statusFilter === 'approved'" [class.btn-secondary]="statusFilter !== 'approved'" (click)="changeFilter('approved')">Approved</button>
+    <button type="button" class="btn btn-sm" [class.btn-primary]="statusFilter === 'rejected'" [class.btn-secondary]="statusFilter !== 'rejected'" (click)="changeFilter('rejected')">Rejected</button>
+    <button type="button" class="btn btn-sm" [class.btn-primary]="statusFilter === null" [class.btn-secondary]="statusFilter !== null" (click)="changeFilter(null)">All</button>
+  </div>
+
+  <div *ngIf="loading" class="empty-state">Loading...</div>
+
+  <div *ngIf="!loading && vendors.length === 0" class="empty-state">No vendor applications.</div>
+
+  <div class="table-wrapper" *ngIf="!loading && vendors.length > 0">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Store Name</th>
+          <th>User</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of vendors">
+          <td>
+            <strong>{{ v.store_name }}</strong>
+            <div class="text-muted">{{ v.store_slug }}</div>
+          </td>
+          <td>{{ v.user?.name }}<div class="text-muted">{{ v.user?.email }}</div></td>
+          <td><span class="status-badge" [ngClass]="'status-' + v.status">{{ v.status }}</span></td>
+          <td class="text-right">
+            <ng-container *ngIf="v.status === 'pending'">
+              <button type="button" class="btn btn-success btn-sm" (click)="approve(v.id)">Approve</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="reject(v.id)">Reject</button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    [currentPage]="meta.current_page"
+    [lastPage]="meta.last_page"
+    (pageChange)="load($event)"
+  ></app-pagination>
+</div>

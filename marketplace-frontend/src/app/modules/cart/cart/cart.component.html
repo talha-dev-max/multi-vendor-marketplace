@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="page-header"><h1>Your Cart</h1></div>
+
+  <div *ngIf="loading" class="empty-state">Loading...</div>
+
+  <div *ngIf="!loading && cart && cart.items.length === 0" class="empty-state">
+    <h3>Your cart is empty</h3>
+    <a routerLink="/" class="btn btn-primary mt-md">Start shopping</a>
+  </div>
+
+  <div *ngIf="!loading && cart && cart.items.length > 0">
+    <div class="card mb-md" *ngFor="let item of cart.items">
+      <div class="flex gap-md items-center">
+        <div style="flex: 1;">
+          <strong>{{ item.product.name }}</strong>
+          <div class="text-muted">by {{ item.product.vendor.store_name }}</div>
+          <div class="text-muted">${{ item.unit_price | number: '1.2-2' }} each</div>
+        </div>
+        <div class="form-group" style="margin: 0; width: 80px;">
+          <input
+            type="number"
+            min="1"
+            [max]="item.product.stock"
+            [value]="item.quantity"
+            (change)="updateQuantity(item.id, +$any($event.target).value)"
+          />
+        </div>
+        <div style="min-width: 100px; text-align: right;">
+          <strong>${{ item.line_total | number: '1.2-2' }}</strong>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm text-danger" (click)="remove(item.id)">Remove</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex justify-between items-center">
+        <div>
+          <div class="text-muted">{{ cart.quantity_total }} item(s)</div>
+          <h2 class="mt-0">Total: ${{ cart.total | number: '1.2-2' }}</h2>
+        </div>
+        <div class="flex gap-md">
+          <button type="button" class="btn btn-secondary" (click)="clear()">Clear Cart</button>
+          <a routerLink="/cart/checkout" class="btn btn-primary btn-lg">Checkout →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

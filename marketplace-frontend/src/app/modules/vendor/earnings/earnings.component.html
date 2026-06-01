@@ -1,0 +1,45 @@
+<div class="app-header">
+  <h1>Earnings</h1>
+</div>
+
+<div class="app-content">
+  <div *ngIf="loading" class="empty-state">Loading...</div>
+
+  <div *ngIf="!loading && summary" class="grid grid-cols-4 mb-lg">
+    <app-stat-card label="Gross" [value]="'$' + (summary.gross | number: '1.2-2')"></app-stat-card>
+    <app-stat-card label="Net" [value]="'$' + (summary.net | number: '1.2-2')"></app-stat-card>
+    <app-stat-card label="Pending" [value]="'$' + (summary.pending | number: '1.2-2')"></app-stat-card>
+    <app-stat-card label="Released" [value]="'$' + (summary.released | number: '1.2-2')"></app-stat-card>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading && earnings.length > 0">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Gross</th>
+          <th>Commission</th>
+          <th>Net</th>
+          <th>Status</th>
+          <th>Released</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of earnings">
+          <td>#{{ e.order_id }}</td>
+          <td>${{ e.gross | number: '1.2-2' }}</td>
+          <td>${{ e.commission | number: '1.2-2' }}</td>
+          <td><strong>${{ e.net | number: '1.2-2' }}</strong></td>
+          <td><span class="status-badge" [ngClass]="'status-' + e.status">{{ e.status }}</span></td>
+          <td>{{ e.released_at | date: 'mediumDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    [currentPage]="meta.current_page"
+    [lastPage]="meta.last_page"
+    (pageChange)="loadPage($event)"
+  ></app-pagination>
+</div>

@@ -1,0 +1,43 @@
+<div class="app-header">
+  <h1>Users</h1>
+</div>
+
+<div class="app-content">
+  <div *ngIf="loading" class="empty-state">Loading...</div>
+
+  <div class="table-wrapper" *ngIf="!loading && users.length > 0">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Roles</th>
+          <th>Verified</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td>#{{ u.id }}</td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.email }}</td>
+          <td>
+            <span *ngFor="let r of u.roles" class="status-badge" style="margin-right: 4px;" [ngClass]="r === 'admin' ? 'status-approved' : 'status-pending'">
+              {{ r }}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="u.email_verified_at; else notVerified" class="text-success">✓</span>
+            <ng-template #notVerified><span class="text-muted">—</span></ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    [currentPage]="meta.current_page"
+    [lastPage]="meta.last_page"
+    (pageChange)="load($event)"
+  ></app-pagination>
+</div>

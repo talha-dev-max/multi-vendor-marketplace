@@ -1,0 +1,29 @@
+<div class="app-header">
+  <h1>Dashboard</h1>
+</div>
+
+<div class="app-content">
+  <div *ngIf="loading" class="empty-state">Loading...</div>
+
+  <div *ngIf="!loading" class="grid grid-cols-4">
+    <app-stat-card label="Products" [value]="productsTotal"></app-stat-card>
+    <app-stat-card label="Total Orders" [value]="ordersTotal"></app-stat-card>
+    <app-stat-card
+      label="Pending Earnings"
+      [value]="'$' + (summary?.pending ?? 0 | number: '1.2-2')"
+    ></app-stat-card>
+    <app-stat-card
+      label="Released Earnings"
+      [value]="'$' + (summary?.released ?? 0 | number: '1.2-2')"
+    ></app-stat-card>
+  </div>
+
+  <div class="card mt-lg">
+    <h3>Quick Links</h3>
+    <div class="flex gap-md">
+      <a routerLink="/vendor/products" class="btn btn-primary">Manage Products</a>
+      <a routerLink="/vendor/orders" class="btn btn-secondary">View Orders</a>
+      <a routerLink="/vendor/earnings" class="btn btn-secondary">Earnings History</a>
+    </div>
+  </div>
+</div>
