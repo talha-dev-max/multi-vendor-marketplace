@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/earning",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Earning\\": "app/",
+            "Modules\\Earning\\Database\\Factories\\": "database/factories/",
+            "Modules\\Earning\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Earning\\Tests\\": "tests/"
+        }
+    }
+}

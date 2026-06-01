@@ -1,0 +1,11 @@
+{
+    "name": "Earning",
+    "alias": "earning",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Earning\\Providers\\EarningServiceProvider"
+    ],
+    "files": []
+}
