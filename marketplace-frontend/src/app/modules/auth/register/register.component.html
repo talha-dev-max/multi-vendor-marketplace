@@ -1,0 +1,37 @@
+<div class="guest-layout">
+  <div class="guest-card">
+    <h1 class="guest-title">Create Account</h1>
+
+    <div *ngIf="error" class="alert alert-error">{{ error }}</div>
+    <div *ngIf="fieldErrors['email']" class="alert alert-error">
+      <div *ngFor="let m of fieldErrors['email']">{{ m }}</div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="name" autofocus />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" />
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="password_confirmation" />
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loading || form.invalid">
+        {{ loading ? 'Creating...' : 'Create Account' }}
+      </button>
+    </form>
+
+    <p class="text-center mt-lg text-muted">
+      Already have an account? <a routerLink="/auth/login">Sign in</a>
+    </p>
+  </div>
+</div>

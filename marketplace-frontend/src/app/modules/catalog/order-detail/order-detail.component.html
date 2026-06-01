@@ -1,0 +1,65 @@
+<div class="page-container" *ngIf="order">
+  <div class="page-header">
+    <h1>Order #{{ order.id }}</h1>
+    <a routerLink="/my/orders" class="btn btn-ghost">← Back</a>
+  </div>
+
+  <div class="card mb-lg">
+    <div class="card-header"><h3>Summary</h3></div>
+    <div class="flex justify-between mb-sm">
+      <span>Total</span>
+      <strong>${{ order.total | number: '1.2-2' }}</strong>
+    </div>
+    <div class="flex justify-between mb-sm">
+      <span>Status</span>
+      <span class="status-badge" [ngClass]="'status-' + order.status">{{ order.status }}</span>
+    </div>
+    <div class="flex justify-between mb-sm">
+      <span>Payment</span>
+      <span>{{ order.payment_method | uppercase }} — <span class="status-badge" [ngClass]="'status-' + order.payment_status">{{ order.payment_status }}</span></span>
+    </div>
+    <div class="flex justify-between">
+      <span>Placed</span>
+      <span>{{ order.placed_at | date: 'medium' }}</span>
+    </div>
+  </div>
+
+  <h3 class="mt-lg">Shipping Address</h3>
+  <div class="card mb-lg">
+    <div>{{ order.shipping_address.full_name }}</div>
+    <div>{{ order.shipping_address.address_line1 }}</div>
+    <div *ngIf="order.shipping_address.address_line2">{{ order.shipping_address.address_line2 }}</div>
+    <div>{{ order.shipping_address.city }}, {{ order.shipping_address.state }} {{ order.shipping_address.postal_code }}</div>
+    <div>{{ order.shipping_address.country }}</div>
+    <div class="text-muted mt-sm">{{ order.shipping_address.phone }}</div>
+  </div>
+
+  <h3>Items by Vendor</h3>
+  <div class="card mb-md" *ngFor="let vo of order.vendor_orders">
+    <div class="card-header">
+      <h3>{{ vo.vendor?.store_name }}</h3>
+      <span class="status-badge" [ngClass]="'status-' + vo.status">{{ vo.status }}</span>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of vo.items">
+          <td>{{ item.product_name }}</td>
+          <td>${{ item.unit_price | number: '1.2-2' }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>${{ item.line_total | number: '1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right mt-md">
+      <strong>Subtotal: ${{ vo.subtotal | number: '1.2-2' }}</strong>
+    </div>
+  </div>
+</div>
