@@ -1,0 +1,10 @@
+{
+    "Auth": true,
+    "Vendor": true,
+    "Catalog": true,
+    "Cart": true,
+    "Order": true,
+    "Payment": true,
+    "Earning": true,
+    "Admin": true
+}
