@@ -1,0 +1,78 @@
+@use "variables" as *;
+
+.table-wrapper {
+  overflow-x: auto;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+}
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: $color-bg;
+
+    th {
+      text-align: left;
+      padding: $spacing-md;
+      font-weight: 600;
+      color: $color-text-muted;
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid $color-border;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $color-border;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: rgba(255, 107, 0, 0.02);
+      }
+    }
+
+    td {
+      padding: $spacing-md;
+      color: $color-text;
+    }
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    text-transform: capitalize;
+    white-space: nowrap;
+
+    &.status-active, &.status-approved, &.status-delivered, &.status-released, &.status-paid, &.status-succeeded {
+      background: rgba(16, 185, 129, 0.12);
+      color: $color-success;
+    }
+
+    &.status-canceled, &.status-rejected, &.status-failed {
+      background: rgba(239, 68, 68, 0.12);
+      color: $color-danger;
+    }
+
+    &.status-pending, &.status-draft, &.status-inactive, &.status-confirmed, &.status-shipped, &.status-past_due {
+      background: rgba(245, 158, 11, 0.12);
+      color: $color-warning;
+    }
+
+    &.status-partially_shipped, &.status-partially_delivered {
+      background: rgba(59, 130, 246, 0.12);
+      color: $color-info;
+    }
+  }
+}

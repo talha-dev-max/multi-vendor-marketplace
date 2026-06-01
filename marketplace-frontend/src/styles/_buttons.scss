@@ -1,0 +1,70 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.btn {
+  @include button-base;
+}
+
+.btn-primary {
+  background: $color-primary;
+  color: #fff;
+  border-color: $color-primary;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-dark;
+    border-color: $color-primary-dark;
+  }
+}
+
+.btn-secondary {
+  background: $color-surface;
+  color: $color-text;
+  border-color: $color-border-dark;
+
+  &:hover:not(:disabled) {
+    background: $color-bg;
+  }
+}
+
+.btn-danger {
+  background: $color-danger;
+  color: #fff;
+  border-color: $color-danger;
+
+  &:hover:not(:disabled) {
+    filter: brightness(0.92);
+  }
+}
+
+.btn-success {
+  background: $color-success;
+  color: #fff;
+  border-color: $color-success;
+
+  &:hover:not(:disabled) {
+    filter: brightness(0.92);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $color-text;
+
+  &:hover:not(:disabled) {
+    background: $color-bg;
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  padding: $spacing-md $spacing-lg;
+  font-size: $font-size-lg;
+}

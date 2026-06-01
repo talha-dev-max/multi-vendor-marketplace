@@ -1,0 +1,72 @@
+@use "variables" as *;
+
+.form-group {
+  margin-bottom: $spacing-md;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+    color: $color-text;
+    font-size: $font-size-sm;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="search"],
+  textarea,
+  select {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-base;
+    font-family: inherit;
+    color: $color-text;
+    background: $color-surface;
+    border: 1px solid $color-border-dark;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+    }
+
+    &:disabled {
+      background: $color-bg;
+      cursor: not-allowed;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .error-text {
+    color: $color-danger;
+    font-size: $font-size-sm;
+    margin-top: $spacing-xs;
+  }
+
+  .hint {
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    margin-top: $spacing-xs;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  .form-group {
+    flex: 1;
+    min-width: 200px;
+  }
+}
